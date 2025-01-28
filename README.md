@@ -1,0 +1,1 @@
+# osga-setup
