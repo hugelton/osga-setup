@@ -1,7 +1,11 @@
 # osga-setup
 
 auto installer for osga.
-please run inline code at terminal:
+
 ```
-git clone https://github.com/hugelton/osga-setup.git;chmode +x osga-setup/setup.sh;./osga-setup/setup.sh
+cd ~
+wget https://raw.githubusercontent.com/hugelton/osga-setup/main/install.sh
+chmod +x install.sh
+./install.sh
+sudo reboot
 ```
