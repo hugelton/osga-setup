@@ -1,4 +1,3 @@
-# install.sh - RPiに直接配置して1回だけ実行
 #!/bin/bash
 
 echo "Starting OSGA installation..."
@@ -9,8 +8,9 @@ sudo apt-get update
 sudo apt-get install -y \
     python3-pip \
     python3-venv \
-    python3-pygame \
-    git
+    git \
+    libjpeg-dev \
+    zlib1g-dev
 
 # HDMI解像度の設定
 echo "Configuring HDMI resolution..."
@@ -22,6 +22,14 @@ hdmi_force_hotplug=1
 hdmi_group=2
 hdmi_mode=87
 hdmi_cvt=320 240 60 1 0 0 0
+EOF
+fi
+
+# フレームバッファの設定
+echo "Configuring framebuffer..."
+if ! grep -q "dtoverlay=fb" /boot/config.txt; then
+    sudo tee -a /boot/config.txt << EOF
+dtoverlay=fb
 EOF
 fi
 
@@ -49,7 +57,7 @@ Type=simple
 User=pi
 WorkingDirectory=/home/pi/osga
 Environment="PATH=/home/pi/osga/venv/bin:$PATH"
-Environment="DISPLAY=:0"
+Environment="FRAMEBUFFER=/dev/fb0"
 ExecStart=/home/pi/osga/venv/bin/python3 main.py
 Restart=always
 RestartSec=5
@@ -58,9 +66,12 @@ RestartSec=5
 WantedBy=multi-user.target
 EOF
 
+# ビデオグループにユーザーを追加
+sudo usermod -a -G video pi
+
 # サービスの有効化
 sudo systemctl enable osga.service
 
 echo "Installation completed!"
-echo "Please reboot the system to apply HDMI settings."
+echo "Please reboot the system to apply all settings."
 echo "After reboot, the service will start automatically."
