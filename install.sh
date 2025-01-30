@@ -20,6 +20,7 @@ sudo apt-get install -y \
     libraspberrypi-dev \
     raspberrypi-kernel-headers　\
 luajit libluajit-5.1-dev　\
+python-rpi.gpio　\
 
 # HDMI解像度の設定
 echo "Configuring HDMI resolution..."
