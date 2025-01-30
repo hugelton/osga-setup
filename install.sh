@@ -36,7 +36,7 @@ fi
 # プロジェクトのクローンと環境設定
 echo "Cloning OSGA repository..."
 cd /home/pi
-git clone git@github.com:hugelton/osga.git
+git clone https://github.com/hugelton/osga.git
 
 # Python仮想環境のセットアップ
 echo "Setting up Python virtual environment..."
