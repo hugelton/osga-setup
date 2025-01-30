@@ -10,7 +10,10 @@ sudo apt-get install -y \
     python3-venv \
     git \
     libjpeg-dev \
-    zlib1g-dev
+    zlib1g-dev \
+    libopenjp2-7 \     
+    libopenjp2-7-dev \ 
+    libtiff5          
 
 # HDMI解像度の設定
 echo "Configuring HDMI resolution..."
