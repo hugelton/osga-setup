@@ -14,24 +14,22 @@ sudo apt-get install -y \
     libopenjp2-7 \     
     libopenjp2-7-dev \ 
     libtiff6         \ 
-        python3-pil
+        python3-pil \
+        cmake \
+    build-essential \
+    libraspberrypi-dev \
+    raspberrypi-kernel-headers　\
+luajit libluajit-5.1-dev　\
 
 # HDMI解像度の設定
 echo "Configuring HDMI resolution..."
 if ! grep -q "hdmi_cvt=320 240" /boot/firmware/config.txt; then
     sudo tee -a /boot/firmware/config.txt << EOF
 
-# OSGA Display Settings HDMI
+# OSGA Display Settings 
+dtparam=spi=on
+dtoverlay=rpi-display
 hdmi_force_hotplug=1
-hdmi_group=2
-hdmi_mode=87
-hdmi_cvt=320 240 60 1 0 0 0
-
-# LCD Framebuffer 
-dtoverlay=fb1
-dtparam=fb1_width=320
-dtparam=fb1_height=240
-dtparam=fb1_depth=16
 EOF
 fi
 
