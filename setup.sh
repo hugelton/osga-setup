@@ -14,8 +14,8 @@ sudo apt-get install -y \
 
 # HDMI解像度の設定
 echo "Configuring HDMI resolution..."
-if ! grep -q "hdmi_cvt=320 240" /boot/config.txt; then
-    sudo tee -a /boot/config.txt << EOF
+if ! grep -q "hdmi_cvt=320 240" /boot/firmware/config.txt; then
+    sudo tee -a /boot/firmware/config.txt << EOF
 
 # OSGA Display Settings
 hdmi_force_hotplug=1
@@ -27,8 +27,8 @@ fi
 
 # フレームバッファの設定
 echo "Configuring framebuffer..."
-if ! grep -q "dtoverlay=fb" /boot/config.txt; then
-    sudo tee -a /boot/config.txt << EOF
+if ! grep -q "dtoverlay=fb" /boot/firmware/config.txt; then
+    sudo tee -a /boot/firmware/config.txt << EOF
 dtoverlay=fb
 EOF
 fi
