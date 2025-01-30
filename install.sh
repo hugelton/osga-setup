@@ -13,7 +13,8 @@ sudo apt-get install -y \
     zlib1g-dev \
     libopenjp2-7 \     
     libopenjp2-7-dev \ 
-    libtiff5          
+    libtiff6         \ 
+        python3-pil
 
 # HDMI解像度の設定
 echo "Configuring HDMI resolution..."
